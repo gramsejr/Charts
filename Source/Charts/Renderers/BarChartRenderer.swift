@@ -306,7 +306,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             if !isSingleColor
             {
                 // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
-                context.setFillColor(dataSet.color(atIndex: j).cgColor)
+                if let e = dataSet.entryForIndex(j) as? BarChartDataEntry {
+                    if let color = e.color {
+                        context.setFillColor(color.cgColor)
+                    }
+                } else {
+                    context.setFillColor(dataSet.color(atIndex: j).cgColor)
+                }
             }
             
             context.fill(barRect)
@@ -608,7 +614,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     /// Draws a value at the specified x and y position.
     @objc open func drawValue(context: CGContext, value: String, xPos: CGFloat, yPos: CGFloat, font: NSUIFont, align: NSTextAlignment, color: NSUIColor)
     {
-        ChartUtils.drawText(context: context, text: value, point: CGPoint(x: xPos, y: yPos), align: align, attributes: [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: color])
+        ChartUtils.drawText(context: context, text: value, point: CGPoint(x: xPos, y: yPos), align: align, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color])
     }
     
     open override func drawExtras(context: CGContext)

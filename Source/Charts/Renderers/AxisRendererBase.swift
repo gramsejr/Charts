@@ -15,6 +15,9 @@ import CoreGraphics
 @objc(ChartAxisRendererBase)
 open class AxisRendererBase: Renderer
 {
+    
+    public var timeInterval: TimeInterval?;
+    public var dateFormatter: DateFormatter?;
     /// base axis this axis renderer works with
     @objc open var axis: AxisBase?
     

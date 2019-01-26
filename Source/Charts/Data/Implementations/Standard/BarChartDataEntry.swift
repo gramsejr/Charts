@@ -13,6 +13,7 @@ import Foundation
 
 open class BarChartDataEntry: ChartDataEntry
 {
+    public var color : UIColor?
     /// the values the stacked barchart holds
     private var _yVals: [Double]?
     
